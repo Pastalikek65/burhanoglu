@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Burhanoglu Otomotiv lüks otomobil ve seçkin emlak ilanları için dijital showroom. Premium araçlar, yatırım değerindeki gayrimenkuller ve güvenilir danışmanlık.">
+  <meta name="keywords" content="Burhanoglu Otomotiv, luks arac, otomobil galerisi, satilik arac, emlak, villa, daire">
+  <meta property="og:title" content="Burhanoglu Otomotiv | Premium Showroom">
+  <meta property="og:description" content="Lüks araçlar ve seçkin emlak portföyü için sinematik dijital showroom.">
+  <meta property="og:type" content="website">
+  <title>Burhanoğlu Otomotiv | Premium Araç ve Emlak Showroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --black-soft: #111111;
+      --ink: #161616;
+      --panel: #1a1a1a;
+      --line: #2a2a2a;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #8b6914;
+      --white: #ffffff;
+      --muted: #a0a0a0;
+      --success: #38a169;
+      --danger: #e53e3e;
+      --shadow: 0 28px 80px rgba(0, 0, 0, .45);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(201,168,76,.12), transparent 34rem),
+        linear-gradient(180deg, #050505 0%, var(--black) 42%, #080808 100%);
+      color: var(--white);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body.menu-open { overflow: hidden; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.48'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(10,10,10,.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(232,201,122,.62);
+      background: linear-gradient(145deg, rgba(201,168,76,.28), rgba(255,255,255,.02));
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      box-shadow: 0 0 24px rgba(201,168,76,.16);
+    }
+
+    .brand-mark svg { width: 30px; height: 30px; }
+    .brand-name { display: grid; gap: 2px; }
+    .brand-name strong {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      letter-spacing: .02em;
+      color: var(--gold-light);
+    }
+    .brand-name span {
+      font-size: 10px;
+      letter-spacing: .22em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      padding: 10px 12px;
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+      border-radius: var(--radius);
+      transition: color .2s ease, background .2s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold-light);
+      background: rgba(201,168,76,.08);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-btn, .menu-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      color: var(--white);
+      display: inline-grid;
+      place-items: center;
+      transition: border .2s ease, transform .2s ease, color .2s ease;
+    }
+    .icon-btn:hover, .menu-btn:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+    .menu-btn { display: none; }
+
+    .btn {
+      border: 1px solid rgba(201,168,76,.7);
+      background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(232,201,122,.04));
+      color: var(--gold-light);
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: transform .2s ease, background .2s ease, color .2s ease, border .2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      background: var(--gold);
+      color: #111;
+      border-color: var(--gold);
+    }
+    .btn.solid { background: var(--gold); color: #101010; border-color: var(--gold); }
+    .btn.solid:hover { background: var(--gold-light); }
+    .btn.ghost { border-color: rgba(255,255,255,.16); color: var(--white); background: rgba(255,255,255,.04); }
+    .btn.ghost:hover { color: var(--gold-light); background: rgba(201,168,76,.10); }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      padding: 120px 0 64px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.65) 44%, rgba(0,0,0,.26) 100%),
+        linear-gradient(0deg, rgba(10,10,10,1) 0%, rgba(10,10,10,.15) 32%, rgba(10,10,10,.48) 100%),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=85") center / cover;
+      animation: cinematic 18s ease-in-out infinite alternate;
+    }
+    @keyframes cinematic {
+      from { transform: scale(1); filter: saturate(.9) contrast(1.05); }
+      to { transform: scale(1.07); filter: saturate(1.1) contrast(1.16); }
+    }
+
+    .light-sweep {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(232,201,122,.12) 46%, transparent 56%, transparent 100%);
+      transform: translateX(-40%);
+      animation: sweep 7s ease-in-out infinite;
+    }
+    @keyframes sweep {
+      0%, 45% { transform: translateX(-60%); opacity: 0; }
+      58% { opacity: 1; }
+      100% { transform: translateX(65%); opacity: 0; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(330px, .52fr);
+      align-items: end;
+      gap: 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ""; width: 42px; height: 1px; background: var(--gold); }
+
+    h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; }
+    .hero h1 {
+      max-width: 860px;
+      font-size: clamp(56px, 9vw, 124px);
+      line-height: .88;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+    }
+    .gold-text {
+      color: transparent;
+      background: linear-gradient(100deg, #fff7d1 0%, var(--gold-light) 30%, var(--gold) 58%, #7d5b12 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      color: rgba(255,255,255,.76);
+      font-size: 18px;
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .hero-card {
+      border: 1px solid rgba(232,201,122,.28);
+      background: linear-gradient(180deg, rgba(22,22,22,.9), rgba(10,10,10,.76));
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 22px;
+      backdrop-filter: blur(14px);
+    }
+    .hero-card img {
+      height: 190px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-card small {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 800;
+      font-size: 11px;
+    }
+    .hero-card h2 { margin: 8px 0 12px; font-size: 30px; }
+    .hero-card p { color: var(--muted); line-height: 1.6; }
+
+    .section {
+      padding: 104px 0;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .section.alt { background: rgba(255,255,255,.025); }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+    .section-title h2 {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1;
+      margin-top: 8px;
+    }
+    .section-title p {
+      max-width: 590px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(22,22,22,.72);
+      border-radius: var(--radius);
+    }
+    .field {
+      min-height: 44px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #0f0f0f;
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 0 12px;
+      outline: none;
+      min-width: 150px;
+    }
+    .field:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.12); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,.1);
+      background: linear-gradient(180deg, rgba(22,22,22,.94), rgba(12,12,12,.96));
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-width: 0;
+      transition: transform .25s ease, border .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(201,168,76,.56);
+      box-shadow: 0 24px 70px rgba(0,0,0,.42);
+    }
+    .media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #070707;
+    }
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease, opacity .25s ease;
+    }
+    .card:hover .media img { transform: scale(1.08); }
+    .media .alt-img {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+    .card:hover .media .alt-img { opacity: 1; }
+
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      border: 1px solid rgba(232,201,122,.62);
+      background: rgba(10,10,10,.78);
+      color: var(--gold-light);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .card-body { padding: 18px; }
+    .card-kicker {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .card h3 { font-size: 25px; line-height: 1.12; margin-bottom: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .chip {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.74);
+      padding: 7px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+    }
+    .price {
+      color: var(--gold-light);
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .mini-link {
+      color: var(--gold-light);
+      font-weight: 800;
+      font-size: 14px;
+      border: 0;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .list-view { grid-template-columns: 1fr; }
+    .list-view .card { display: grid; grid-template-columns: 330px 1fr; }
+    .list-view .media { aspect-ratio: auto; height: 100%; min-height: 240px; }
+    .list-view .card-body { display: grid; align-content: center; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .stat {
+      border: 1px solid rgba(232,201,122,.18);
+      background:
+        linear-gradient(180deg, rgba(201,168,76,.08), rgba(255,255,255,.02)),
+        rgba(22,22,22,.8);
+      padding: 28px 22px;
+      border-radius: var(--radius);
+    }
+    .stat strong {
+      display: block;
+      color: var(--gold-light);
+      font-size: clamp(32px, 5vw, 56px);
+      font-family: "Playfair Display", serif;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat span { color: var(--muted); font-weight: 700; }
+
+    .experience {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .showroom {
+      min-height: 620px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(232,201,122,.22);
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.85), rgba(0,0,0,.14)),
+        url("https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1500&q=85") center / cover;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .showroom::after {
+      content: "";
+      position: absolute;
+      inset: auto 12% 0;
+      height: 42%;
+      background: radial-gradient(ellipse at center, rgba(232,201,122,.26), transparent 58%);
+      filter: blur(28px);
+    }
+    .steps { display: grid; gap: 14px; }
+    .step {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(22,22,22,.78);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .step-num {
+      height: 54px;
+      border: 1px solid rgba(232,201,122,.38);
+      color: var(--gold-light);
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      background: rgba(201,168,76,.08);
+    }
+    .step h3 { font-size: 24px; margin-bottom: 8px; }
+    .step p { color: var(--muted); line-height: 1.65; }
+
+    .admin-preview {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      border: 1px solid rgba(232,201,122,.22);
+      background: #0d0d0d;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .admin-side {
+      background: #111;
+      border-right: 1px solid rgba(255,255,255,.08);
+      padding: 22px;
+    }
+    .admin-pill {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-radius: var(--radius);
+      color: rgba(255,255,255,.72);
+      margin-bottom: 8px;
+      background: rgba(255,255,255,.03);
+    }
+    .admin-pill.active { color: var(--gold-light); background: rgba(201,168,76,.1); }
+    .admin-main { padding: 22px; min-width: 0; }
+    .admin-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .metric {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .metric strong { display: block; color: var(--gold-light); font-size: 28px; margin-top: 6px; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      color: rgba(255,255,255,.78);
+      overflow: hidden;
+      font-size: 14px;
+    }
+    .table th, .table td { padding: 13px 10px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+    .table th { color: var(--gold-light); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .status { color: var(--success); font-weight: 800; }
+
+    .contact-band {
+      background:
+        linear-gradient(90deg, rgba(139,105,20,.95), rgba(201,168,76,.9)),
+        url("https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=1600&q=80") center / cover;
+      color: #101010;
+    }
+    .contact-band .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 42px 0;
+    }
+    .contact-band h2 { font-size: clamp(30px, 4vw, 54px); line-height: 1; }
+    .contact-band p { font-weight: 700; margin-top: 10px; }
+    .contact-band .btn { border-color: #111; color: #111; background: rgba(255,255,255,.22); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr .86fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .form, .contact-card {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(22,22,22,.8);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    textarea.field { padding-top: 12px; min-height: 132px; resize: vertical; grid-column: 1 / -1; }
+    .contact-card { display: grid; gap: 18px; align-content: start; }
+    .info-line { display: flex; gap: 14px; align-items: start; color: rgba(255,255,255,.8); line-height: 1.55; }
+    .map {
+      min-height: 230px;
+      border: 1px solid rgba(232,201,122,.2);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(45deg, rgba(10,10,10,.6), rgba(10,10,10,.25)),
+        url("https://images.unsplash.com/photo-1569336415962-a4bd9f69c07b?auto=format&fit=crop&w=1000&q=80") center / cover;
+      position: relative;
+      overflow: hidden;
+    }
+    .map::after {
+      content: "Burhanoğlu Otomotiv";
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(10,10,10,.82);
+      border: 1px solid rgba(232,201,122,.38);
+      color: var(--gold-light);
+      font-weight: 800;
+    }
+
+    footer {
+      padding: 42px 0 32px;
+      background: #050505;
+      color: rgba(255,255,255,.68);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, 1fr);
+      gap: 26px;
+      margin-bottom: 32px;
+    }
+    footer h3 { color: var(--white); margin-bottom: 14px; font-size: 22px; }
+    footer a, footer p { display: block; color: rgba(255,255,255,.65); margin-bottom: 10px; line-height: 1.55; }
+    footer a:hover { color: var(--gold-light); }
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+
+    .float-actions {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      display: grid;
+      gap: 10px;
+    }
+    .float-actions a, .to-top {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .whatsapp { background: #25d366; }
+    .call { background: var(--gold-dark); }
+    .to-top { background: #111; opacity: 0; transform: translateY(10px); transition: .2s ease; }
+    .to-top.visible { opacity: 1; transform: none; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+    }
+    .modal.open { display: flex; }
+    .modal-panel {
+      width: min(1040px, 100%);
+      max-height: calc(100vh - 44px);
+      overflow: auto;
+      border: 1px solid rgba(232,201,122,.28);
+      background: #101010;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(16,16,16,.92);
+      backdrop-filter: blur(12px);
+    }
+    .close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: white;
+      font-size: 24px;
+    }
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      padding: 20px;
+    }
+    .gallery-main {
+      aspect-ratio: 16 / 11;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 10px;
+    }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+    .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .thumbs button {
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #080808;
+      overflow: hidden;
+      border-radius: var(--radius);
+      opacity: .68;
+    }
+    .thumbs button.active { opacity: 1; border-color: var(--gold); }
+    .thumbs img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-box {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.035);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .detail-box h3 { font-size: 24px; margin-bottom: 12px; }
+    .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .spec {
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 9px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+    }
+    .spec span:first-child { color: var(--muted); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      z-index: 300;
+      border: 1px solid rgba(232,201,122,.28);
+      background: #111;
+      color: var(--white);
+      padding: 13px 18px;
+      border-radius: 999px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.38);
+      transition: .25s ease;
+      pointer-events: none;
+      text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: fixed;
+        inset: 76px 0 auto;
+        display: none;
+        grid-template-columns: 1fr;
+        padding: 18px 20px 22px;
+        background: rgba(10,10,10,.96);
+        border-bottom: 1px solid rgba(255,255,255,.1);
+      }
+      body.menu-open .nav-links { display: grid; }
+      .menu-btn { display: inline-grid; }
+      .nav-actions .btn { display: none; }
+      .hero-grid, .experience, .contact-grid, .modal-body { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .admin-preview { grid-template-columns: 1fr; }
+      .admin-side { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .list-view .card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .nav { height: 68px; }
+      .brand { min-width: auto; }
+      .brand-name strong { font-size: 17px; }
+      .brand-name span { display: none; }
+      .hero { padding: 100px 0 40px; min-height: 92svh; }
+      .hero h1 { font-size: clamp(44px, 17vw, 76px); }
+      .hero-copy { font-size: 16px; }
+      .section { padding: 74px 0; }
+      .section-head { display: grid; }
+      .grid, .stats, .admin-metrics, .footer-grid, .form-grid { grid-template-columns: 1fr; }
+      .contact-band .container { display: grid; }
+      .toolbar .field, .toolbar .btn { width: 100%; }
+      .specs { grid-template-columns: 1fr; }
+      .float-actions { right: 14px; bottom: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="nav container" aria-label="Ana navigasyon">
+      <a class="brand" href="#anasayfa" aria-label="Burhanoglu Otomotiv anasayfa">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <path d="M10 38c4-13 11-20 22-20s18 7 22 20" stroke="#E8C97A" stroke-width="3" stroke-linecap="round"/>
+            <path d="M14 38h36c4 0 7 3 7 7v2H7v-2c0-4 3-7 7-7Z" stroke="#C9A84C" stroke-width="3"/>
+            <circle cx="20" cy="47" r="5" fill="#C9A84C"/><circle cx="44" cy="47" r="5" fill="#C9A84C"/>
+          </svg>
+        </span>
+        <span class="brand-name"><strong>Burhanoğlu</strong><span>Otomotiv & Emlak</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#araclar">Araçlar</a>
+        <a href="#emlak">Emlak</a>
+        <a href="#deneyim">Deneyim</a>
+        <a href="#admin">Admin</a>
+        <a href="#iletisim">İletişim</a>
+      </div>
+      <div class="nav-actions">
+        <a class="icon-btn" href="tel:+905551112233" title="Telefon" aria-label="Telefon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.61a2 2 0 0 1-.45 2.11L8 9.72a16 16 0 0 0 6.28 6.28l1.28-1.28a2 2 0 0 1 2.11-.45c.84.29 1.71.5 2.61.62A2 2 0 0 1 22 16.92Z"/></svg>
+        </a>
+        <a class="btn" href="#iletisim">Randevu Al</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menü">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="anasayfa">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="light-sweep" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Premium showroom</span>
+          <h1><span class="gold-text">Hayalinizdeki Araç</span> Burada</h1>
+          <p class="hero-copy">Burhanoğlu Otomotiv, seçilmiş premium araçları ve yatırım değeri yüksek gayrimenkulleri tek bir dijital showroom deneyiminde buluşturur. Işık, detay ve güven aynı sahnede.</p>
+          <div class="hero-actions">
+            <a class="btn solid" href="#araclar">Araçları Keşfet</a>
+            <a class="btn ghost" href="#emlak">Emlak Portföyü</a>
+          </div>
+        </div>
+        <aside class="hero-card reveal">
+          <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80" alt="Mercedes showroom aracı">
+          <small>Haftanın vitrini</small>
+          <h2>Mercedes S-Class</h2>
+          <p>Executive segment, düşük kilometre, tam ekspertiz ve kişiye özel teslimat randevusu.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="araclar">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <span class="eyebrow">Araç vitrini</span>
+            <h2>Spotlight Altında Seçilmiş Modeller</h2>
+            <p>Marka, yakıt, vites ve bütçe filtreleriyle vitrini anında daraltın. Kartlarda ikinci fotoğraf hover geçişi ve detay galerisi aktif.</p>
+          </div>
+          <button class="btn ghost" id="viewToggle">Liste Görünümü</button>
+        </div>
+        <div class="toolbar reveal" aria-label="Araç filtreleri">
+          <select class="field" id="vehicleBrand"><option value="">Tüm Markalar</option></select>
+          <select class="field" id="vehicleFuel"><option value="">Tüm Yakıtlar</option></select>
+          <select class="field" id="vehicleGear"><option value="">Tüm Vitesler</option></select>
+          <select class="field" id="vehicleSort">
+            <option value="new">En Yeni</option>
+            <option value="priceAsc">En Düşük Fiyat</option>
+            <option value="priceDesc">En Yüksek Fiyat</option>
+          </select>
+          <input class="field" id="vehicleSearch" type="search" placeholder="Model veya özellik ara">
+          <button class="btn" id="vehicleReset">Sıfırla</button>
+        </div>
+        <p class="card-kicker reveal" id="vehicleCount">Araçlar yükleniyor</p>
+        <div class="grid reveal" id="vehicleGrid"></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="emlak">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <span class="eyebrow">Emlak portföyü</span>
+            <h2>Seçili Yaşam ve Yatırım Alanları</h2>
+            <p>Villa, daire, iş yeri ve arsa portföyü; lokasyon, metrekare ve işlem tipine göre hızlı filtrelenir.</p>
+          </div>
+          <a class="btn ghost" href="#iletisim">Yatırım Danışmanı</a>
+        </div>
+        <div class="toolbar reveal" aria-label="Emlak filtreleri">
+          <select class="field" id="propertyType"><option value="">Tüm Tipler</option></select>
+          <select class="field" id="propertyTransaction"><option value="">Satılık / Kiralık</option></select>
+          <select class="field" id="propertyRooms"><option value="">Tüm Odalar</option></select>
+          <input class="field" id="propertySearch" type="search" placeholder="Konum veya başlık ara">
+          <button class="btn" id="propertyReset">Sıfırla</button>
+        </div>
+        <p class="card-kicker reveal" id="propertyCount">Emlaklar yükleniyor</p>
+        <div class="grid reveal" id="propertyGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="neden-biz">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <span class="eyebrow">Neden biz</span>
+            <h2>Güven, Hız ve Premium Sunum</h2>
+          </div>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><strong data-count="500">0</strong><span>Araç Satışı</span></div>
+          <div class="stat"><strong data-count="10">0</strong><span>Yıl Deneyim</span></div>
+          <div class="stat"><strong data-count="200">0</strong><span>Mutlu Müşteri</span></div>
+          <div class="stat"><strong data-count="24">0</strong><span>7/24 Destek</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="deneyim">
+      <div class="container experience">
+        <div class="showroom reveal" aria-label="Lüks showroom görseli"></div>
+        <div class="reveal">
+          <span class="eyebrow">Showroom deneyimi</span>
+          <div class="section-title">
+            <h2>İlan Değil, Sahne Kuruyoruz</h2>
+            <p>Her araç ve emlak kaydı, profesyonel fotoğraf sırası, net teknik bilgi, hızlı iletişim ve danışman takibiyle satışa hazırlanır.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="step-num">01</div><div><h3>Ekspertiz ve Değerleme</h3><p>Portföye alınan her ürün için teknik kontrol, piyasa analizi ve satış pozisyonu belirlenir.</p></div></div>
+            <div class="step"><div class="step-num">02</div><div><h3>Sinematik Sunum</h3><p>Kapak fotoğrafı, galeri sırası, özellik listesi ve fiyat iletişimi premium algıya göre kurgulanır.</p></div></div>
+            <div class="step"><div class="step-num">03</div><div><h3>Hızlı Temas</h3><p>Telefon, WhatsApp ve form talepleri ilan adıyla birlikte danışmana iletilir; dönüş süresi kısalır.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="admin">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <span class="eyebrow">Admin panel konsepti</span>
+            <h2>İlan Yönetimi İçin Hazır Kontrol Merkezi</h2>
+            <p>Canlı projede JWT giriş, fotoğraf yükleme, vitrin yönetimi, site ayarları ve iletişim kayıtları bu panel mantığıyla geliştirilebilir.</p>
+          </div>
+        </div>
+        <div class="admin-preview reveal">
+          <aside class="admin-side">
+            <div class="brand" style="margin-bottom:22px"><span class="brand-mark"></span><span class="brand-name"><strong>Admin</strong><span>secure panel</span></span></div>
+            <div class="admin-pill active"><span>Dashboard</span><strong>12</strong></div>
+            <div class="admin-pill"><span>Araçlar</span><strong>47</strong></div>
+            <div class="admin-pill"><span>Emlak</span><strong>18</strong></div>
+            <div class="admin-pill"><span>Ayarlar</span><strong>SEO</strong></div>
+          </aside>
+          <div class="admin-main">
+            <div class="admin-metrics">
+              <div class="metric"><span>Toplam Araç</span><strong>47</strong></div>
+              <div class="metric"><span>Toplam Emlak</span><strong>18</strong></div>
+              <div class="metric"><span>Bu Ay Eklenen</span><strong>9</strong></div>
+            </div>
+            <table class="table" aria-label="Admin ilan tablosu">
+              <thead><tr><th>İlan</th><th>Tip</th><th>Fiyat</th><th>Durum</th></tr></thead>
+              <tbody>
+                <tr><td>Mercedes S-Class 2022</td><td>Araç</td><td>₺7.850.000</td><td class="status">Aktif</td></tr>
+                <tr><td>Merkezi Konumda 3+1 Daire</td><td>Emlak</td><td>₺4.950.000</td><td class="status">Vitrin</td></tr>
+                <tr><td>BMW X7 xDrive</td><td>Araç</td><td>₺8.250.000</td><td class="status">Aktif</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-band">
+      <div class="container">
+        <div>
+          <h2>Bizi Arayın veya WhatsApp'tan Yazın</h2>
+          <p>Premium portföy için hızlı randevu: +90 555 111 22 33</p>
+        </div>
+        <a class="btn" href="https://wa.me/905551112233?text=Merhaba%20Burhanoglu%20Otomotiv%2C%20portfoy%20hakkinda%20bilgi%20almak%20istiyorum." target="_blank" rel="noreferrer">WhatsApp Görüşmesi</a>
+      </div>
+    </section>
+
+    <section class="section" id="iletisim">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <span class="eyebrow">İletişim</span>
+            <h2>Showroom Randevusu Oluşturun</h2>
+            <p>İlgilendiğiniz araç veya emlak için adınızı bırakın; danışmanlarımız size en kısa sürede dönüş yapsın.</p>
+          </div>
+        </div>
+        <div class="contact-grid reveal">
+          <form class="form" id="contactForm">
+            <div class="form-grid">
+              <input class="field" required name="name" placeholder="Ad Soyad">
+              <input class="field" required name="phone" placeholder="Telefon">
+              <input class="field" type="email" name="email" placeholder="E-posta">
+              <select class="field" name="subject"><option>Araç danışmanlığı</option><option>Emlak danışmanlığı</option><option>Satış / takas</option></select>
+              <textarea class="field" required name="message" placeholder="Mesajınız"></textarea>
+            </div>
+            <button class="btn solid" style="margin-top:14px" type="submit">Talep Gönder</button>
+          </form>
+          <aside class="contact-card">
+            <div class="info-line"><strong>Adres</strong><span>İstanbul yolu üzeri premium showroom alanı</span></div>
+            <div class="info-line"><strong>Telefon</strong><span>+90 555 111 22 33</span></div>
+            <div class="info-line"><strong>E-posta</strong><span>info@burhanogluotomotiv.com</span></div>
+            <div class="info-line"><strong>Saatler</strong><span>Hafta içi 09:00 - 19:00, Cumartesi 10:00 - 18:00</span></div>
+            <div class="map" aria-label="Harita önizleme"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Burhanoğlu Otomotiv</h3>
+          <p>Lüks otomobil galerisi hissini dijitalde yaşatan, araç ve emlak portföyünü aynı premium standartta sunan showroom.</p>
+        </div>
+        <div><h3>Site</h3><a href="#araclar">Araçlar</a><a href="#emlak">Emlak</a><a href="#deneyim">Deneyim</a></div>
+        <div><h3>Hizmet</h3><a href="#iletisim">Randevu</a><a href="#admin">Admin Panel</a><a href="#neden-biz">Neden Biz</a></div>
+        <div><h3>Sosyal</h3><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">X / Twitter</a></div>
+      </div>
+      <div class="copyright"><span>© 2026 Burhanoğlu Otomotiv. Tüm hakları saklıdır.</span><span>Premium araç ve emlak showroom deneyimi.</span></div>
+    </div>
+  </footer>
+
+  <div class="float-actions" aria-label="Hızlı iletişim">
+    <a class="whatsapp" href="https://wa.me/905551112233" target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.47 15.05L2 22l5.09-1.5A9.96 9.96 0 1 0 12.04 2Zm5.8 14.08c-.24.68-1.37 1.25-1.92 1.33-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.16-4.93-4.35-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.59-.36.78-.36h.56c.18.01.42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.45.29.15.46.12.63-.07.2-.22.73-.85.93-1.14.2-.29.39-.24.66-.15.27.1 1.73.82 2.02.96.29.15.49.22.56.34.07.12.07.7-.17 1.38Z"/></svg>
+    </a>
+    <a class="call" href="tel:+905551112233" title="Telefon" aria-label="Telefon">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.61a2 2 0 0 1-.45 2.11L8 9.72a16 16 0 0 0 6.28 6.28l1.28-1.28a2 2 0 0 1 2.11-.45c.84.29 1.71.5 2.61.62A2 2 0 0 1 22 16.92Z"/></svg>
+    </a>
+    <button class="to-top" id="toTop" title="Yukarı" aria-label="Yukarı çık">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <p class="card-kicker" id="modalKicker">Detay</p>
+          <h2 id="modalTitle">İlan Detayı</h2>
+        </div>
+        <button class="close" id="modalClose" aria-label="Kapat">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">İşlem başarılı</div>
+
+  <script>
+    const money = new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 });
+
+    const vehicles = [
+      {
+        id: "v1", brand: "Mercedes", model: "S-Class 400d 4MATIC", year: 2022, km: 18000, fuel: "Dizel", gear: "Otomatik", body: "Sedan", price: 7850000, badge: "Vitrin",
+        color: "Obsidyen Siyah", power: "330 HP", engine: "3.0L", drive: "4MATIC", seats: "5",
+        features: ["Burmester ses", "Masajlı koltuk", "Gece görüş", "Panoramik tavan"],
+        desc: "Makam konforu, kusursuz servis geçmişi ve showroom teslim standardında hazırlanmış S-Class.",
+        photos: [
+          "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "v2", brand: "BMW", model: "X7 xDrive40i M Sport", year: 2023, km: 12000, fuel: "Benzin", gear: "Otomatik", body: "SUV", price: 8250000, badge: "Yeni",
+        color: "Mineral Beyaz", power: "381 HP", engine: "3.0L", drive: "xDrive", seats: "7",
+        features: ["Laser far", "Harman Kardon", "7 koltuk", "Head-up display"],
+        desc: "Aile konforunu performansla birleştiren, dolu paket ve düşük kilometreli premium SUV.",
+        photos: [
+          "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "v3", brand: "Audi", model: "RS e-tron GT", year: 2024, km: 4200, fuel: "Elektrik", gear: "Otomatik", body: "Coupe", price: 9950000, badge: "Elektrik",
+        color: "Daytona Gri", power: "646 HP", engine: "Dual Motor", drive: "Quattro", seats: "4",
+        features: ["Karbon paket", "Matrix LED", "Adaptif süspansiyon", "360 kamera"],
+        desc: "Sessiz güç, dramatik tasarım ve yüksek performanslı elektrikli grand tourer deneyimi.",
+        photos: [
+          "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "v4", brand: "Porsche", model: "Cayenne Coupe", year: 2021, km: 31000, fuel: "Benzin", gear: "Otomatik", body: "SUV", price: 6900000, badge: "Sport",
+        color: "Jet Siyah", power: "340 HP", engine: "3.0L", drive: "AWD", seats: "5",
+        features: ["Sport Chrono", "Bose ses", "Alcantara tavan", "Adaptif hız"],
+        desc: "Günlük kullanım ve sportif karakteri aynı gövdede taşıyan yüksek donanımlı Cayenne Coupe.",
+        photos: [
+          "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "v5", brand: "Range Rover", model: "Sport HSE", year: 2022, km: 26000, fuel: "Hibrit", gear: "Otomatik", body: "SUV", price: 9100000, badge: "Luxury",
+        color: "Santorini Siyah", power: "404 HP", engine: "PHEV", drive: "4WD", seats: "5",
+        features: ["Meridian ses", "Soğutmalı koltuk", "Terrain response", "Cam tavan"],
+        desc: "Prestij, arazi kabiliyeti ve şehir içi sessiz sürüşü bir araya getiren HSE paket.",
+        photos: [
+          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "v6", brand: "Toyota", model: "Land Cruiser Prado", year: 2020, km: 54000, fuel: "Dizel", gear: "Otomatik", body: "SUV", price: 4650000, badge: "4x4",
+        color: "İnci Beyazı", power: "177 HP", engine: "2.8L", drive: "4WD", seats: "7",
+        features: ["Diferansiyel kilidi", "7 koltuk", "Soğutmalı torpido", "Geri görüş"],
+        desc: "Dayanıklılığıyla bilinen, aile ve uzun yol için güven veren temiz Prado.",
+        photos: [
+          "https://images.unsplash.com/photo-1535732820275-9ffd998cac22?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=82"
+        ]
+      }
+    ];
+
+    const properties = [
+      {
+        id: "p1", title: "Boğaz Hattına Yakın Panoramik Villa", type: "Villa", transaction: "Satılık", city: "İstanbul", district: "Beykoz", rooms: "6+2", gross: 620, net: 510, age: 3, price: 38500000, badge: "Satılık",
+        features: ["Havuz", "Kapalı otopark", "Akıllı ev", "Güvenlik"],
+        desc: "Geniş bahçe, yüksek tavan ve özel yaşam alanlarıyla prestijli villa portföyü.",
+        photos: [
+          "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "p2", title: "Merkezi Konumda 3+1 Rezidans", type: "Daire", transaction: "Satılık", city: "Ankara", district: "Çankaya", rooms: "3+1", gross: 185, net: 150, age: 1, price: 4950000, badge: "Vitrin",
+        features: ["Asansör", "Kapalı otopark", "Güvenlik", "Ebeveyn banyosu"],
+        desc: "Yeni bina, sosyal alanlar ve ulaşım akslarına yakın premium rezidans daire.",
+        photos: [
+          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "p3", title: "Ticari Aks Üzerinde Kurumsal İş Yeri", type: "İş Yeri", transaction: "Kiralık", city: "İzmir", district: "Bayraklı", rooms: "Açık Plan", gross: 420, net: 380, age: 5, price: 185000, badge: "Kiralık",
+        features: ["Cadde cephe", "Tabela değeri", "Depo", "Yük asansörü"],
+        desc: "Yoğun yaya ve araç trafiği olan hatta, marka görünürlüğü yüksek iş yeri.",
+        photos: [
+          "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "p4", title: "Deniz Manzaralı Modern 4+1", type: "Daire", transaction: "Satılık", city: "Antalya", district: "Konyaaltı", rooms: "4+1", gross: 240, net: 198, age: 2, price: 8650000, badge: "Yeni",
+        features: ["Balkon", "Havuz", "Site", "Deniz manzarası"],
+        desc: "Sahile yakın, geniş balkonlu ve sosyal tesisli modern aile dairesi.",
+        photos: [
+          "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "p5", title: "Gelişim Bölgesinde Yatırımlık Arsa", type: "Arsa", transaction: "Satılık", city: "Bursa", district: "Nilüfer", rooms: "İmarlı", gross: 1850, net: 1850, age: 0, price: 12250000, badge: "Yatırım",
+        features: ["İmarlı", "Yol cepheli", "Köşe parsel", "Altyapı yakın"],
+        desc: "Değer artış potansiyeli yüksek bölgede, planlı gelişim aksına yakın arsa.",
+        photos: [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82"
+        ]
+      },
+      {
+        id: "p6", title: "Şehirden Uzak Müstakil Taş Ev", type: "Müstakil Ev", transaction: "Satılık", city: "Muğla", district: "Ula", rooms: "2+1", gross: 155, net: 128, age: 8, price: 7350000, badge: "Doğa",
+        features: ["Bahçe", "Şömine", "Otopark", "Taş mimari"],
+        desc: "Doğa içinde, kısa dönem konaklama potansiyeli olan karakterli taş ev.",
+        photos: [
+          "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1600566752229-250ed79470d6?auto=format&fit=crop&w=1200&q=82"
+        ]
+      }
+    ];
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+    function unique(list, key) {
+      return [...new Set(list.map(item => item[key]))].sort((a, b) => String(a).localeCompare(String(b), "tr"));
+    }
+
+    function fillSelect(select, values) {
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+      });
+    }
+
+    fillSelect($("#vehicleBrand"), unique(vehicles, "brand"));
+    fillSelect($("#vehicleFuel"), unique(vehicles, "fuel"));
+    fillSelect($("#vehicleGear"), unique(vehicles, "gear"));
+    fillSelect($("#propertyType"), unique(properties, "type"));
+    fillSelect($("#propertyTransaction"), unique(properties, "transaction"));
+    fillSelect($("#propertyRooms"), unique(properties, "rooms"));
+
+    function vehicleCard(item) {
+      return `<article class="card">
+        <div class="media">
+          <img src="${item.photos[0]}" alt="${item.brand} ${item.model}" loading="lazy">
+          <img class="alt-img" src="${item.photos[1]}" alt="${item.brand} ${item.model} ikinci fotoğraf" loading="lazy">
+          <span class="badge">${item.badge}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-kicker">${item.brand} · ${item.year}</p>
+          <h3>${item.model}</h3>
+          <div class="chips"><span class="chip">${item.km.toLocaleString("tr-TR")} KM</span><span class="chip">${item.fuel}</span><span class="chip">${item.gear}</span><span class="chip">${item.body}</span></div>
+          <div class="price">${money.format(item.price)}</div>
+          <div class="card-foot"><button class="mini-link" data-detail="vehicle" data-id="${item.id}">Detayı Gör →</button><span class="chip">${item.color}</span></div>
+        </div>
+      </article>`;
+    }
+
+    function propertyCard(item) {
+      return `<article class="card">
+        <div class="media">
+          <img src="${item.photos[0]}" alt="${item.title}" loading="lazy">
+          <img class="alt-img" src="${item.photos[1]}" alt="${item.title} ikinci fotoğraf" loading="lazy">
+          <span class="badge">${item.badge}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-kicker">${item.type} · ${item.transaction}</p>
+          <h3>${item.title}</h3>
+          <div class="chips"><span class="chip">📍 ${item.district}, ${item.city}</span><span class="chip">${item.gross} m²</span><span class="chip">${item.rooms}</span><span class="chip">${item.age} yaş</span></div>
+          <div class="price">${money.format(item.price)}</div>
+          <div class="card-foot"><button class="mini-link" data-detail="property" data-id="${item.id}">Detayı Gör →</button><span class="chip">${item.transaction}</span></div>
+        </div>
+      </article>`;
+    }
+
+    function renderVehicles() {
+      const brand = $("#vehicleBrand").value;
+      const fuel = $("#vehicleFuel").value;
+      const gear = $("#vehicleGear").value;
+      const term = $("#vehicleSearch").value.toLocaleLowerCase("tr-TR");
+      const sort = $("#vehicleSort").value;
+      let result = vehicles.filter(item =>
+        (!brand || item.brand === brand) &&
+        (!fuel || item.fuel === fuel) &&
+        (!gear || item.gear === gear) &&
+        (!term || `${item.brand} ${item.model} ${item.features.join(" ")}`.toLocaleLowerCase("tr-TR").includes(term))
+      );
+      if (sort === "priceAsc") result.sort((a, b) => a.price - b.price);
+      if (sort === "priceDesc") result.sort((a, b) => b.price - a.price);
+      if (sort === "new") result.sort((a, b) => b.year - a.year);
+      $("#vehicleGrid").innerHTML = result.map(vehicleCard).join("");
+      $("#vehicleCount").textContent = `${result.length} araç bulundu`;
+      updateUrl();
+    }
+
+    function renderProperties() {
+      const type = $("#propertyType").value;
+      const transaction = $("#propertyTransaction").value;
+      const rooms = $("#propertyRooms").value;
+      const term = $("#propertySearch").value.toLocaleLowerCase("tr-TR");
+      const result = properties.filter(item =>
+        (!type || item.type === type) &&
+        (!transaction || item.transaction === transaction) &&
+        (!rooms || item.rooms === rooms) &&
+        (!term || `${item.title} ${item.city} ${item.district} ${item.features.join(" ")}`.toLocaleLowerCase("tr-TR").includes(term))
+      );
+      $("#propertyGrid").innerHTML = result.map(propertyCard).join("");
+      $("#propertyCount").textContent = `${result.length} emlak bulundu`;
+    }
+
+    function updateUrl() {
+      const params = new URLSearchParams();
+      if ($("#vehicleBrand").value) params.set("marka", $("#vehicleBrand").value);
+      if ($("#vehicleFuel").value) params.set("yakit", $("#vehicleFuel").value);
+      if ($("#vehicleGear").value) params.set("vites", $("#vehicleGear").value);
+      const query = params.toString();
+      history.replaceState(null, "", `${location.pathname}${query ? `?${query}` : ""}${location.hash || ""}`);
+    }
+
+    ["vehicleBrand", "vehicleFuel", "vehicleGear", "vehicleSort", "vehicleSearch"].forEach(id => $("#" + id).addEventListener("input", renderVehicles));
+    ["propertyType", "propertyTransaction", "propertyRooms", "propertySearch"].forEach(id => $("#" + id).addEventListener("input", renderProperties));
+    $("#vehicleReset").addEventListener("click", () => { ["vehicleBrand", "vehicleFuel", "vehicleGear", "vehicleSearch"].forEach(id => $("#" + id).value = ""); $("#vehicleSort").value = "new"; renderVehicles(); });
+    $("#propertyReset").addEventListener("click", () => { ["propertyType", "propertyTransaction", "propertyRooms", "propertySearch"].forEach(id => $("#" + id).value = ""); renderProperties(); });
+
+    $("#viewToggle").addEventListener("click", () => {
+      $("#vehicleGrid").classList.toggle("list-view");
+      $("#viewToggle").textContent = $("#vehicleGrid").classList.contains("list-view") ? "Grid Görünümü" : "Liste Görünümü";
+    });
+
+    function openDetail(kind, id) {
+      const item = kind === "vehicle" ? vehicles.find(v => v.id === id) : properties.find(p => p.id === id);
+      if (!item) return;
+      $("#modalKicker").textContent = kind === "vehicle" ? "Araç Detayı" : "Emlak Detayı";
+      $("#modalTitle").textContent = kind === "vehicle" ? `${item.brand} ${item.model}` : item.title;
+      const specs = kind === "vehicle"
+        ? [["Yıl", item.year], ["KM", item.km.toLocaleString("tr-TR")], ["Yakıt", item.fuel], ["Vites", item.gear], ["Kasa", item.body], ["Renk", item.color], ["Motor", item.engine], ["Güç", item.power], ["Çekiş", item.drive], ["Koltuk", item.seats]]
+        : [["Tip", item.type], ["İşlem", item.transaction], ["Konum", `${item.district}, ${item.city}`], ["Brüt", `${item.gross} m²`], ["Net", `${item.net} m²`], ["Oda", item.rooms], ["Bina Yaşı", item.age], ["Fiyat", money.format(item.price)]];
+      const message = encodeURIComponent(`Merhaba Burhanoglu Otomotiv, ${kind === "vehicle" ? `${item.brand} ${item.model}` : item.title} ilani hakkinda bilgi almak istiyorum.`);
+      $("#modalBody").innerHTML = `
+        <div>
+          <div class="gallery-main"><img id="galleryImage" src="${item.photos[0]}" alt="${kind === "vehicle" ? `${item.brand} ${item.model}` : item.title}"></div>
+          <div class="thumbs">${item.photos.map((photo, index) => `<button class="${index === 0 ? "active" : ""}" data-photo="${photo}"><img src="${photo}" alt="Galeri fotoğrafı ${index + 1}"></button>`).join("")}</div>
+          <div class="detail-box" style="margin-top:14px"><h3>Açıklama</h3><p style="color:var(--muted);line-height:1.7">${item.desc}</p></div>
+        </div>
+        <div>
+          <div class="detail-box"><h3>${money.format(item.price)}</h3><div class="specs">${specs.map(([label, value]) => `<div class="spec"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div></div>
+          <div class="detail-box"><h3>Özellikler</h3><div class="chips">${item.features.map(feature => `<span class="chip">✓ ${feature}</span>`).join("")}</div></div>
+          <div class="detail-box"><h3>İletişim</h3><p style="color:var(--muted);line-height:1.7;margin-bottom:14px">Burhanoğlu Otomotiv danışmanı ilan adını otomatik mesajınıza ekler.</p><div class="hero-actions"><a class="btn solid" href="tel:+905551112233">Telefon</a><a class="btn" href="https://wa.me/905551112233?text=${message}" target="_blank" rel="noreferrer">WhatsApp</a></div></div>
+        </div>`;
+      $("#detailModal").classList.add("open");
+      $("#detailModal").setAttribute("aria-hidden", "false");
+      $$(".thumbs button").forEach(button => button.addEventListener("click", () => {
+        $("#galleryImage").src = button.dataset.photo;
+        $$(".thumbs button").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+      }));
+    }
+
+    document.addEventListener("click", event => {
+      const detail = event.target.closest("[data-detail]");
+      if (detail) openDetail(detail.dataset.detail, detail.dataset.id);
+    });
+    $("#modalClose").addEventListener("click", closeModal);
+    $("#detailModal").addEventListener("click", event => { if (event.target.id === "detailModal") closeModal(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeModal(); });
+    function closeModal() {
+      $("#detailModal").classList.remove("open");
+      $("#detailModal").setAttribute("aria-hidden", "true");
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          if (entry.target.classList.contains("stats")) animateStats();
+        }
+      });
+    }, { threshold: .16 });
+    $$(".reveal, .stats").forEach(element => observer.observe(element));
+
+    let counted = false;
+    function animateStats() {
+      if (counted) return;
+      counted = true;
+      $$(".stat strong").forEach(element => {
+        const target = Number(element.dataset.count);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 64));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          element.textContent = target === 24 ? "7/24" : `${current}+`;
+        }, 24);
+      });
+    }
+
+    const toTop = $("#toTop");
+    window.addEventListener("scroll", () => {
+      toTop.classList.toggle("visible", window.scrollY > 720);
+      const current = [...$$("main section[id]")].reverse().find(section => section.getBoundingClientRect().top <= 120);
+      $$(".nav-links a").forEach(link => link.classList.toggle("active", current && link.getAttribute("href") === `#${current.id}`));
+    });
+    toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+
+    $("#menuBtn").addEventListener("click", () => document.body.classList.toggle("menu-open"));
+    $$(".nav-links a").forEach(link => link.addEventListener("click", () => document.body.classList.remove("menu-open")));
+
+    $("#contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      event.currentTarget.reset();
+      showToast("Talebiniz alındı. Danışman ekibi kısa sürede dönüş yapacak.");
+    });
+    function showToast(message) {
+      $("#toast").textContent = message;
+      $("#toast").classList.add("show");
+      setTimeout(() => $("#toast").classList.remove("show"), 3000);
+    }
+
+    renderVehicles();
+    renderProperties();
+  </script>
+</body>
+</html>
